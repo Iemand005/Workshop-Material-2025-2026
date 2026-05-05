@@ -9,6 +9,6 @@
 
 const char* ssid        = "";
 const char* password    = "";
-const char* host        = "";
-const uint16_t port     = 0;
+const char* host        = "websocket.itip-demo.ucll.cloud"; // socket.io test backend for this demo
+const uint16_t port     = 8890; // socket.io test port for this demo
 const String syncword   = "";
