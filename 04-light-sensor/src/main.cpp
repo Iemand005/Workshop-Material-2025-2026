@@ -5,7 +5,7 @@ Make sure you use a voltage divider to step down the voltage from the sensor to 
 Use a 10kΩ resistor in series with the sensor output.
 */
 
-#define pinSensor 36
+#define pinSensor 15
 #define pinLed 2
 const int threshold = 2000; // Example threshold value for the sensor
 
