@@ -7,7 +7,7 @@ Use a 10kΩ resistor in series with the sensor output.
 
 #define pinSensor 15
 #define pinLed 2
-const int threshold = 2000; // Example threshold value for the sensor
+const int threshold = 2500; // Example threshold value for the sensor
 
 void setup() {
     Serial.begin(115200);
