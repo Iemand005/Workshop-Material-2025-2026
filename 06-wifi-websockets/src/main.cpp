@@ -199,8 +199,8 @@ void setup() {
     display.setTextSize(1);
     display.setTextColor(WHITE);
 
-    displayMessage("oled init");
-    displayMessage(ssid);
+    // displayMessage("oled init");
+    // displayMessage(ssid);
     
     WiFi.disconnect();
     WiFi.setSleep(false);
