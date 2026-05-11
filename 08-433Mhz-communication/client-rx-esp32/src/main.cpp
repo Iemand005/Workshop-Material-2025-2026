@@ -24,6 +24,20 @@ void setup() {
 }
 
 void loop() {
+
+    bool dataState = digitalRead(pinReceiver);
+
+    digitalWrite(pinLed, dataState);
+
+    if (dataState == HIGH) {
+        Serial.print("1");
+    } else {
+        Serial.print("0");
+    }
+    delay(1);
+
+    return;
+
     digitalWrite(pinLed, ledStatus);
 
     if (mySwitch.available()) {
