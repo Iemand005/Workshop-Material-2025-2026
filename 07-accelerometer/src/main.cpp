@@ -21,7 +21,7 @@ SCL       A5
 #define REG_WHO_AM_I 0x75
 
 // Threshold for movement detection (tune as needed)
-const int threshold = 10000;
+const int threshold = 10;
 
 // Three-axis baseline values for resting position
 int16_t baseX, baseY, baseZ;
