@@ -16,7 +16,9 @@ void setup() {
 
     pinMode(pinLed, OUTPUT);
 
-    mySwitch.enableReceive(pinReceiver);
+    // mySwitch.enableReceive(pinReceiver);
+
+    mySwitch.enableReceive(digitalPinToInterrupt(pinReceiver));
 
     Serial.println("Setup complete");
 }
