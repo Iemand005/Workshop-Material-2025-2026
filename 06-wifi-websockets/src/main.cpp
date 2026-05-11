@@ -200,8 +200,12 @@ void setup() {
     display.setTextColor(WHITE);
 
     displayMessage("oled init");
-
+    displayMessage(ssid);
+    
+    WiFi.disconnect();
+    WiFi.setSleep(false);
     WiFi.begin(ssid, password);
+
 
     while (WiFi.status() != WL_CONNECTED) {
         delay(500);
