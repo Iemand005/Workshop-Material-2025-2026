@@ -21,7 +21,7 @@ void setup() {
   display.setTextSize(1);
   display.setTextColor(WHITE);
   display.setCursor(0, 10);
-  display.println("Look here, text!");
+  display.println("Meow");
   display.display();
 }
 
