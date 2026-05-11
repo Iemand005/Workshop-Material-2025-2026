@@ -204,6 +204,15 @@ void setup() {
     
     WiFi.disconnect();
     WiFi.setSleep(false);
+
+    WiFi.softAP("Pipi", "12345678");
+    IPAddress IP = WiFi.softAPIP();
+    Serial.print("Ap IP-adres: ");
+    Serial.println(IP);
+    displayMessage("WiFI OK!\nbals");
+
+    return;
+
     WiFi.begin(ssid, password);
 
 
