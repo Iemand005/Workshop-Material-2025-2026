@@ -104,6 +104,9 @@ void loop() {
     int magnitude = abs(dx) + abs(dy) + abs(dz);
 
     magnitude /= 100;
+
+    if (magnitude > 255) magnitude = 255;
+    if (magnitude < 0) magnitude = 0;
     
     if (magnitude > threshold) {
         // digitalWrite(pinLed, HIGH);
