@@ -102,7 +102,7 @@ void loop() {
     // Use sum of absolute differences as movement magnitude
     int magnitude = abs(dx) + abs(dy) + abs(dz);
 
-    magnitude /= 100;
+    magnitude /= 1000;
 
     if (magnitude > 255) magnitude = 255;
     if (magnitude < 0) magnitude = 0;
