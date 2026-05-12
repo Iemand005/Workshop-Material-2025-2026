@@ -26,6 +26,12 @@ const int threshold = 10;
 // Three-axis baseline values for resting position
 int16_t baseX, baseY, baseZ;
 
+struct Vec3I {
+    int16_t x, y, z;
+};
+
+Vec3I lastPos{0,0,0};
+
 /**
  * @brief Write a byte to a specific register on the MPU-9265
  * 
@@ -46,16 +52,18 @@ void writeRegister(uint8_t reg, uint8_t value) {
  * @param y 
  * @param z 
  */
-void readAccel(int16_t &x, int16_t &y, int16_t &z) {
+Vec3I readAccel() {
     Wire.beginTransmission(MPU_ADDR);
     Wire.write(REG_ACCEL_XOUT_H);
     Wire.endTransmission(false);
     Wire.requestFrom(MPU_ADDR, 6);
 
     // MPU-9265 data is big-endian (high byte first)
-    x = (Wire.read() << 8) | Wire.read();
-    y = (Wire.read() << 8) | Wire.read();
-    z = (Wire.read() << 8) | Wire.read();
+    Vec3I pos;
+    pos.x = (Wire.read() << 8) | Wire.read();
+    pos.y = (Wire.read() << 8) | Wire.read();
+    pos.z = (Wire.read() << 8) | Wire.read();
+    return pos;
 }
 
 void setup() {
@@ -73,7 +81,8 @@ void setup() {
     delay(100);
 
     // Read baseline (resting position)
-    readAccel(baseX, baseY, baseZ);
+    auto pos = readAccel();
+    baseX = pos.x, baseY= pos.y, baseZ= pos.z;
     Serial.print("Baseline - X: "); Serial.print(baseX);
     Serial.print(" Y: "); Serial.print(baseY);
     Serial.println(" Z: "); Serial.println(baseZ);
@@ -83,16 +92,17 @@ void setup() {
 
 void loop() {
     int16_t x, y, z;
-    readAccel(x, y, z);
-
+    auto currentPos = readAccel();
+    
     // Calculate difference from baseline
-    int16_t dx = x - baseX;
-    int16_t dy = y - baseY;
-    int16_t dz = z - baseZ;
+    int16_t dx = currentPos.x - lastPos.x;
+    int16_t dy = currentPos.y - lastPos.y;
+    int16_t dz = currentPos.z - lastPos.z;
 
+    
     // Use sum of absolute differences as movement magnitude
     int magnitude = abs(dx) + abs(dy) + abs(dz);
-
+    
     if (magnitude > threshold) {
         // digitalWrite(pinLed, HIGH);
         analogWrite(pinLed, 10);
@@ -102,6 +112,8 @@ void loop() {
         digitalWrite(pinLed, LOW);
     }
 
+    lastPos = currentPos;
+    
     // don't read too fast to avoid overwhelming the serial output and to give the LED time to respond
     delay(50); // Adjust delay as needed for responsiveness
 }
