@@ -91,7 +91,6 @@ void setup() {
 }
 
 void loop() {
-    int16_t x, y, z;
     auto currentPos = readAccel();
     
     // Calculate difference from baseline
