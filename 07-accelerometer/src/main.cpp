@@ -102,6 +102,8 @@ void loop() {
     
     // Use sum of absolute differences as movement magnitude
     int magnitude = abs(dx) + abs(dy) + abs(dz);
+
+    magnitude /= 100;
     
     if (magnitude > threshold) {
         // digitalWrite(pinLed, HIGH);
