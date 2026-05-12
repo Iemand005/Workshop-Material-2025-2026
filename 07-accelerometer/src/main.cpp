@@ -94,7 +94,8 @@ void loop() {
     int magnitude = abs(dx) + abs(dy) + abs(dz);
 
     if (magnitude > threshold) {
-        digitalWrite(pinLed, HIGH);
+        // digitalWrite(pinLed, HIGH);
+        analogWrite(pinLed, 10);
         Serial.print("Movement detected! Magnitude: ");
         Serial.println(magnitude);
     } else {
