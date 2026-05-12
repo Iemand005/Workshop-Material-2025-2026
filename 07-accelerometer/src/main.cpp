@@ -21,7 +21,7 @@ SCL       A5
 #define REG_WHO_AM_I 0x75
 
 // Threshold for movement detection (tune as needed)
-const int threshold = 10;
+const int threshold = 1;
 
 // Three-axis baseline values for resting position
 int16_t baseX, baseY, baseZ;
@@ -102,7 +102,8 @@ void loop() {
     // Use sum of absolute differences as movement magnitude
     int magnitude = abs(dx) + abs(dy) + abs(dz);
 
-    magnitude /= 1000;
+    magnitude -= 1000;
+    magnitude /= 200;
 
     if (magnitude > 255) magnitude = 255;
     if (magnitude < 0) magnitude = 0;
